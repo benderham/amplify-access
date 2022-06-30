@@ -1,16 +1,15 @@
 {
-  "name": "@monorepo-starter/root",
+  "name": "@amplify-access/root",
   "version": "1.0.0",
-  "description": "An example setup of how to do a monorepo, used in our monorepo 'getting started' guide",
+  "description": "An open source directory of upcoming gigs and venues, focusing on accessibility for patrons. Built on NextJS & KeystoneJS w/TypeScript and Tailwind CSS.",
   "repository": "git@github.com:Thinkmill/monorepo-example.git",
-  "author": "Ben Conolly <ben@thinkmill.com.au>",
+  "author": "Ben Derham <ben@benderham.conm>",
   "license": "MIT",
   "private": true,
   "workspaces": [
     "packages/*",
     "services/*",
-    "apps/*",
-    "website"
+    "apps/*"
   ],
   "scripts": {
     "postinstall": "preconstruct dev && manypkg check",
@@ -18,7 +17,8 @@
     "release": "yarn build && changeset publish",
     "test": "jest",
     "clean": "manypkg exec rm -rf node_modules && manypkg exec rm -rf dist && rm -rf node_modules",
-    "start:next": "yarn manypkg run next-app start",
+    "dev:web": "yarn manypkg run web dev",
+    "start:web": "yarn manypkg run web start",
     "start:server": "yarn manypkg run graphql-api start",
     "start": "echo figure out how to start both services simultaneously here",
     "lint": "yarn eslint ."
