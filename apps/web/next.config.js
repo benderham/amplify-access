@@ -2,7 +2,7 @@
 const withPreconstruct = require('@preconstruct/next');
 
 const nextConfig = {
-  reactStrictMode: true,
+	reactStrictMode: true
 };
 
 module.exports = withPreconstruct(nextConfig);
