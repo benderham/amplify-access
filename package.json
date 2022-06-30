@@ -1,6 +1,6 @@
 {
 	"name": "@amplify-access/root",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"description": "An open source directory of upcoming gigs and venues, focusing on accessibility for patrons. Built on NextJS & KeystoneJS w/TypeScript and Tailwind CSS.",
 	"repository": "https://github.com/benderham/amplify-access",
 	"author": "Ben Derham <ben@benderham.conm>",

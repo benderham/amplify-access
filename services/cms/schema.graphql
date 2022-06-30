@@ -6,13 +6,6 @@ type User {
   name: String
   email: String
   password: PasswordState
-  posts(
-    where: PostWhereInput! = {}
-    orderBy: [PostOrderByInput!]! = []
-    take: Int
-    skip: Int! = 0
-  ): [Post!]
-  postsCount(where: PostWhereInput! = {}): Int
 }
 
 type PasswordState {
@@ -31,7 +24,6 @@ input UserWhereInput {
   id: IDFilter
   name: StringFilter
   email: StringFilter
-  posts: PostManyRelationFilter
 }
 
 input IDFilter {
@@ -73,12 +65,6 @@ input NestedStringFilter {
   not: NestedStringFilter
 }
 
-input PostManyRelationFilter {
-  every: PostWhereInput
-  some: PostWhereInput
-  none: PostWhereInput
-}
-
 input UserOrderByInput {
   id: OrderDirection
   name: OrderDirection
@@ -94,14 +80,6 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
-  posts: PostRelateToManyForUpdateInput
-}
-
-input PostRelateToManyForUpdateInput {
-  disconnect: [PostWhereUniqueInput!]
-  set: [PostWhereUniqueInput!]
-  create: [PostCreateInput!]
-  connect: [PostWhereUniqueInput!]
 }
 
 input UserUpdateArgs {
@@ -113,194 +91,137 @@ input UserCreateInput {
   name: String
   email: String
   password: String
-  posts: PostRelateToManyForCreateInput
 }
 
-input PostRelateToManyForCreateInput {
-  create: [PostCreateInput!]
-  connect: [PostWhereUniqueInput!]
-}
-
-type Post {
-  id: ID!
-  title: String
-  status: String
-  content: Post_content_Document
-  publishDate: DateTime
-  author: User
-  tags(
-    where: TagWhereInput! = {}
-    orderBy: [TagOrderByInput!]! = []
-    take: Int
-    skip: Int! = 0
-  ): [Tag!]
-  tagsCount(where: TagWhereInput! = {}): Int
-}
-
-type Post_content_Document {
-  document(hydrateRelationships: Boolean! = false): JSON!
-}
-
-scalar DateTime
-  @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
-
-input PostWhereUniqueInput {
-  id: ID
-}
-
-input PostWhereInput {
-  AND: [PostWhereInput!]
-  OR: [PostWhereInput!]
-  NOT: [PostWhereInput!]
-  id: IDFilter
-  title: StringFilter
-  status: StringNullableFilter
-  publishDate: DateTimeNullableFilter
-  author: UserWhereInput
-  tags: TagManyRelationFilter
-}
-
-input StringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringNullableFilter
-}
-
-input NestedStringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringNullableFilter
-}
-
-input DateTimeNullableFilter {
-  equals: DateTime
-  in: [DateTime!]
-  notIn: [DateTime!]
-  lt: DateTime
-  lte: DateTime
-  gt: DateTime
-  gte: DateTime
-  not: DateTimeNullableFilter
-}
-
-input TagManyRelationFilter {
-  every: TagWhereInput
-  some: TagWhereInput
-  none: TagWhereInput
-}
-
-input PostOrderByInput {
-  id: OrderDirection
-  title: OrderDirection
-  status: OrderDirection
-  publishDate: OrderDirection
-}
-
-input PostUpdateInput {
-  title: String
-  status: String
-  content: JSON
-  publishDate: DateTime
-  author: UserRelateToOneForUpdateInput
-  tags: TagRelateToManyForUpdateInput
-}
-
-input UserRelateToOneForUpdateInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-  disconnect: Boolean
-}
-
-input TagRelateToManyForUpdateInput {
-  disconnect: [TagWhereUniqueInput!]
-  set: [TagWhereUniqueInput!]
-  create: [TagCreateInput!]
-  connect: [TagWhereUniqueInput!]
-}
-
-input PostUpdateArgs {
-  where: PostWhereUniqueInput!
-  data: PostUpdateInput!
-}
-
-input PostCreateInput {
-  title: String
-  status: String
-  content: JSON
-  publishDate: DateTime
-  author: UserRelateToOneForCreateInput
-  tags: TagRelateToManyForCreateInput
-}
-
-input UserRelateToOneForCreateInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-}
-
-input TagRelateToManyForCreateInput {
-  create: [TagCreateInput!]
-  connect: [TagWhereUniqueInput!]
-}
-
-type Tag {
+type Venue {
   id: ID!
   name: String
-  posts(
-    where: PostWhereInput! = {}
-    orderBy: [PostOrderByInput!]! = []
+  address: String
+  a11yTags(
+    where: VenueA11yTagWhereInput! = {}
+    orderBy: [VenueA11yTagOrderByInput!]! = []
     take: Int
     skip: Int! = 0
-  ): [Post!]
-  postsCount(where: PostWhereInput! = {}): Int
+  ): [VenueA11yTag!]
+  a11yTagsCount(where: VenueA11yTagWhereInput! = {}): Int
 }
 
-input TagWhereUniqueInput {
+input VenueWhereUniqueInput {
   id: ID
 }
 
-input TagWhereInput {
-  AND: [TagWhereInput!]
-  OR: [TagWhereInput!]
-  NOT: [TagWhereInput!]
+input VenueWhereInput {
+  AND: [VenueWhereInput!]
+  OR: [VenueWhereInput!]
+  NOT: [VenueWhereInput!]
   id: IDFilter
   name: StringFilter
-  posts: PostManyRelationFilter
+  address: StringFilter
+  a11yTags: VenueA11yTagManyRelationFilter
 }
 
-input TagOrderByInput {
+input VenueA11yTagManyRelationFilter {
+  every: VenueA11yTagWhereInput
+  some: VenueA11yTagWhereInput
+  none: VenueA11yTagWhereInput
+}
+
+input VenueOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  address: OrderDirection
+}
+
+input VenueUpdateInput {
+  name: String
+  address: String
+  a11yTags: VenueA11yTagRelateToManyForUpdateInput
+}
+
+input VenueA11yTagRelateToManyForUpdateInput {
+  disconnect: [VenueA11yTagWhereUniqueInput!]
+  set: [VenueA11yTagWhereUniqueInput!]
+  create: [VenueA11yTagCreateInput!]
+  connect: [VenueA11yTagWhereUniqueInput!]
+}
+
+input VenueUpdateArgs {
+  where: VenueWhereUniqueInput!
+  data: VenueUpdateInput!
+}
+
+input VenueCreateInput {
+  name: String
+  address: String
+  a11yTags: VenueA11yTagRelateToManyForCreateInput
+}
+
+input VenueA11yTagRelateToManyForCreateInput {
+  create: [VenueA11yTagCreateInput!]
+  connect: [VenueA11yTagWhereUniqueInput!]
+}
+
+type VenueA11yTag {
+  id: ID!
+  name: String
+  venues(
+    where: VenueWhereInput! = {}
+    orderBy: [VenueOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Venue!]
+  venuesCount(where: VenueWhereInput! = {}): Int
+}
+
+input VenueA11yTagWhereUniqueInput {
+  id: ID
+}
+
+input VenueA11yTagWhereInput {
+  AND: [VenueA11yTagWhereInput!]
+  OR: [VenueA11yTagWhereInput!]
+  NOT: [VenueA11yTagWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  venues: VenueManyRelationFilter
+}
+
+input VenueManyRelationFilter {
+  every: VenueWhereInput
+  some: VenueWhereInput
+  none: VenueWhereInput
+}
+
+input VenueA11yTagOrderByInput {
   id: OrderDirection
   name: OrderDirection
 }
 
-input TagUpdateInput {
+input VenueA11yTagUpdateInput {
   name: String
-  posts: PostRelateToManyForUpdateInput
+  venues: VenueRelateToManyForUpdateInput
 }
 
-input TagUpdateArgs {
-  where: TagWhereUniqueInput!
-  data: TagUpdateInput!
+input VenueRelateToManyForUpdateInput {
+  disconnect: [VenueWhereUniqueInput!]
+  set: [VenueWhereUniqueInput!]
+  create: [VenueCreateInput!]
+  connect: [VenueWhereUniqueInput!]
 }
 
-input TagCreateInput {
+input VenueA11yTagUpdateArgs {
+  where: VenueA11yTagWhereUniqueInput!
+  data: VenueA11yTagUpdateInput!
+}
+
+input VenueA11yTagCreateInput {
   name: String
-  posts: PostRelateToManyForCreateInput
+  venues: VenueRelateToManyForCreateInput
+}
+
+input VenueRelateToManyForCreateInput {
+  create: [VenueCreateInput!]
+  connect: [VenueWhereUniqueInput!]
 }
 
 """
@@ -318,18 +239,21 @@ type Mutation {
   updateUsers(data: [UserUpdateArgs!]!): [User]
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUsers(where: [UserWhereUniqueInput!]!): [User]
-  createPost(data: PostCreateInput!): Post
-  createPosts(data: [PostCreateInput!]!): [Post]
-  updatePost(where: PostWhereUniqueInput!, data: PostUpdateInput!): Post
-  updatePosts(data: [PostUpdateArgs!]!): [Post]
-  deletePost(where: PostWhereUniqueInput!): Post
-  deletePosts(where: [PostWhereUniqueInput!]!): [Post]
-  createTag(data: TagCreateInput!): Tag
-  createTags(data: [TagCreateInput!]!): [Tag]
-  updateTag(where: TagWhereUniqueInput!, data: TagUpdateInput!): Tag
-  updateTags(data: [TagUpdateArgs!]!): [Tag]
-  deleteTag(where: TagWhereUniqueInput!): Tag
-  deleteTags(where: [TagWhereUniqueInput!]!): [Tag]
+  createVenue(data: VenueCreateInput!): Venue
+  createVenues(data: [VenueCreateInput!]!): [Venue]
+  updateVenue(where: VenueWhereUniqueInput!, data: VenueUpdateInput!): Venue
+  updateVenues(data: [VenueUpdateArgs!]!): [Venue]
+  deleteVenue(where: VenueWhereUniqueInput!): Venue
+  deleteVenues(where: [VenueWhereUniqueInput!]!): [Venue]
+  createVenueA11yTag(data: VenueA11yTagCreateInput!): VenueA11yTag
+  createVenueA11yTags(data: [VenueA11yTagCreateInput!]!): [VenueA11yTag]
+  updateVenueA11yTag(
+    where: VenueA11yTagWhereUniqueInput!
+    data: VenueA11yTagUpdateInput!
+  ): VenueA11yTag
+  updateVenueA11yTags(data: [VenueA11yTagUpdateArgs!]!): [VenueA11yTag]
+  deleteVenueA11yTag(where: VenueA11yTagWhereUniqueInput!): VenueA11yTag
+  deleteVenueA11yTags(where: [VenueA11yTagWhereUniqueInput!]!): [VenueA11yTag]
   endSession: Boolean!
   authenticateUserWithPassword(
     email: String!
@@ -368,22 +292,22 @@ type Query {
   ): [User!]
   user(where: UserWhereUniqueInput!): User
   usersCount(where: UserWhereInput! = {}): Int
-  posts(
-    where: PostWhereInput! = {}
-    orderBy: [PostOrderByInput!]! = []
+  venues(
+    where: VenueWhereInput! = {}
+    orderBy: [VenueOrderByInput!]! = []
     take: Int
     skip: Int! = 0
-  ): [Post!]
-  post(where: PostWhereUniqueInput!): Post
-  postsCount(where: PostWhereInput! = {}): Int
-  tags(
-    where: TagWhereInput! = {}
-    orderBy: [TagOrderByInput!]! = []
+  ): [Venue!]
+  venue(where: VenueWhereUniqueInput!): Venue
+  venuesCount(where: VenueWhereInput! = {}): Int
+  venueA11yTags(
+    where: VenueA11yTagWhereInput! = {}
+    orderBy: [VenueA11yTagOrderByInput!]! = []
     take: Int
     skip: Int! = 0
-  ): [Tag!]
-  tag(where: TagWhereUniqueInput!): Tag
-  tagsCount(where: TagWhereInput! = {}): Int
+  ): [VenueA11yTag!]
+  venueA11yTag(where: VenueA11yTagWhereUniqueInput!): VenueA11yTag
+  venueA11yTagsCount(where: VenueA11yTagWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

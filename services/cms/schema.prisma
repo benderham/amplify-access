@@ -17,24 +17,17 @@ model User {
   name     String @default("")
   email    String @unique @default("")
   password String
-  posts    Post[] @relation("Post_author")
 }
 
-model Post {
-  id          String    @id @default(cuid())
-  title       String    @default("")
-  status      String?   @default("draft")
-  content     String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  publishDate DateTime?
-  author      User?     @relation("Post_author", fields: [authorId], references: [id])
-  authorId    String?   @map("author")
-  tags        Tag[]     @relation("Post_tags")
-
-  @@index([authorId])
+model Venue {
+  id       String         @id @default(cuid())
+  name     String         @default("")
+  address  String         @default("")
+  a11yTags VenueA11yTag[] @relation("Venue_a11yTags")
 }
 
-model Tag {
-  id    String @id @default(cuid())
-  name  String @default("")
-  posts Post[] @relation("Post_tags")
+model VenueA11yTag {
+  id     String  @id @default(cuid())
+  name   String  @default("")
+  venues Venue[] @relation("Venue_a11yTags")
 }
