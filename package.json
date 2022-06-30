@@ -12,31 +12,27 @@
 		"apps/*"
 	],
 	"scripts": {
-		"postinstall": "preconstruct dev && manypkg check",
-		"build": "preconstruct build",
+		"postinstall": "manypkg check",
+		"build": "yarn manypkg run cms build && yarn manypkg run web build",
 		"release": "yarn build && changeset publish",
 		"test": "jest",
 		"clean": "manypkg exec rm -rf node_modules && manypkg exec rm -rf dist && rm -rf node_modules",
+		"dev:cms": "yarn manypkg run cms dev",
 		"dev:web": "yarn manypkg run web dev",
+		"start:cms": "yarn manypkg run cms start",
 		"start:web": "yarn manypkg run web start",
-		"start": "echo figure out how to start both services simultaneously here",
+		"dev": "concurrently --kill-others \"yarn run dev:*\"",
 		"lint": "yarn eslint ."
 	},
 	"dependencies": {
 		"@changesets/cli": "^2.5.0",
 		"@manypkg/cli": "^0.10.0",
-		"@preconstruct/cli": "^1.1.4",
 		"@typescript-eslint/eslint-plugin": "^5.30.0",
 		"@typescript-eslint/parser": "^5.30.0",
+		"concurrently": "^7.2.2",
 		"eslint": "^8.18.0",
 		"eslint-config-prettier": "^8.5.0",
 		"jest": "^25.1.0",
 		"prettier": "^2.7.1"
-	},
-	"preconstruct": {
-		"packages": [
-			"packages/*",
-			"services/*"
-		]
 	}
 }

@@ -3,13 +3,12 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "next dev -p 7777",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@preconstruct/next": "^4.0.0",
 		"eslint": "^8.18.0",
 		"next": "12.2.0",
 		"react": "^18.2.0",
