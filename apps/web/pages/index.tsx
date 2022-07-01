@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 		query: GET_VENUE_LIST,
 	});
 
-	const venues = data?.venues;
+	const { venues } = data;
 
 	if (!data || !venues) {
 		return {
