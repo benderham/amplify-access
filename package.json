@@ -13,13 +13,13 @@
 	],
 	"scripts": {
 		"postinstall": "manypkg check",
-		"build": "yarn manypkg run cms build && yarn manypkg run web build",
+		"build": "yarn manypkg run api build && yarn manypkg run web build",
 		"release": "yarn build && changeset publish",
 		"test": "jest",
 		"clean": "manypkg exec rm -rf node_modules && manypkg exec rm -rf dist && rm -rf node_modules",
-		"dev:cms": "yarn manypkg run cms dev",
+		"dev:api": "yarn manypkg run api dev",
 		"dev:web": "yarn manypkg run web dev",
-		"start:cms": "yarn manypkg run cms start",
+		"start:api": "yarn manypkg run api start",
 		"start:web": "yarn manypkg run web start",
 		"dev": "concurrently --kill-others \"yarn run dev:*\"",
 		"lint": "yarn eslint ."

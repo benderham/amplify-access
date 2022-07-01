@@ -1,5 +1,5 @@
 # The Services Directory
 
-## CMS
+## API
 
 KeystoneJS

@@ -1,5 +1,5 @@
 {
-	"name": "@amplify-access/cms",
+	"name": "@amplify-access/api",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {

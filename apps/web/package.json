@@ -3,13 +3,16 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev -p 7777",
+		"dev": "next dev -p 4000",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@apollo/client": "^3.6.9",
 		"eslint": "^8.18.0",
+		"eslint-plugin-react": "^7.30.1",
+		"graphql": "^15.8.0",
 		"next": "12.2.0",
 		"react": "^18.2.0",
 		"react-dom": "18.2.0"

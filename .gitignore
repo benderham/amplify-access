@@ -104,3 +104,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# TS-GQL output
+__generated__
